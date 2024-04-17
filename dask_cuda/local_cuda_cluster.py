@@ -226,7 +226,7 @@ class LocalCUDACluster(LocalCluster):
         pre_import=None,
         **kwargs,
     ):
-        print("Using custom LocalCudaCluster by Varun....")
+        print("Using custom LocalCudaCluster by Varun S....")
         # Required by RAPIDS libraries (e.g., cuDF) to ensure no context
         # initialization happens before we can set CUDA_VISIBLE_DEVICES
         os.environ["RAPIDS_NO_INITIALIZE"] = "True"
