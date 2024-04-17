@@ -24,7 +24,7 @@ class RMMSetup(WorkerPlugin):
         release_threshold,
         log_directory,
         track_allocations,
-        device_idx,
+        device_idx=None,
         custom_alloc=None,
         custom_dealloc=None
     ):
@@ -106,9 +106,9 @@ class RMMSetup(WorkerPlugin):
                     worker, self.logging, self.log_directory
                 ),
             )
-        elif self.custom_mr is not None:
-            import rmm
-            rmm.mr.set_current_device_resource(self.custom_mr)
+        # elif self.custom_mr is not None:
+        #     import rmm
+        #     rmm.mr.set_current_device_resource(self.custom_mr)
         
         if self.rmm_track_allocations:
             import rmm
