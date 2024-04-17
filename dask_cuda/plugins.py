@@ -49,7 +49,9 @@ class RMMSetup(WorkerPlugin):
         self.logging = log_directory is not None
         self.log_directory = log_directory
         self.rmm_track_allocations = track_allocations
-        self.custom_mr = custom_mr
+        self.custom_alloc = custom_alloc
+        self.custom_dealloc = custom_dealloc
+        self.device_idx = device_idx
 
     def setup(self, worker=None):
         if self.initial_pool_size is not None:
