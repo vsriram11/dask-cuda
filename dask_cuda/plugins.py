@@ -24,7 +24,9 @@ class RMMSetup(WorkerPlugin):
         release_threshold,
         log_directory,
         track_allocations,
-        custom_mr=None
+        device_idx,
+        custom_alloc=None,
+        custom_dealloc=None
     ):
         if initial_pool_size is None and maximum_pool_size is not None:
             raise ValueError(
