@@ -55,7 +55,7 @@ class RMMSetup(WorkerPlugin):
         self.device_idx = device_idx
 
     def setup(self, worker=None):
-        print("IN RMM SETUP OF DASK...")
+        print(f"IN RMM SETUP OF DASK... device id is {self.device_idx} || custom_alloc is {self.custom_alloc} || custom_dealloc is {self.custom_dealloc}")
         if self.initial_pool_size is not None:
             self.initial_pool_size = parse_device_memory_limit(
                 self.initial_pool_size, alignment_size=256
