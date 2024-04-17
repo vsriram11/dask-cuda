@@ -66,6 +66,8 @@ class CUDAWorker(Server):
         jit_unspill=None,
         worker_class=None,
         pre_import=None,
+        custom_alloc=None,
+        custom_dealloc=None,
         **kwargs,
     ):
         # Required by RAPIDS libraries (e.g., cuDF) to ensure no context
@@ -215,6 +217,9 @@ class CUDAWorker(Server):
                         release_threshold=rmm_release_threshold,
                         log_directory=rmm_log_directory,
                         track_allocations=rmm_track_allocations,
+                        device_idx=nvml_device_index(i, cuda_visible_devices(i)),
+                        custom_alloc=alloc,
+                        custom_dealloc=dealloc
                     ),
                     PreImport(pre_import),
                 },
