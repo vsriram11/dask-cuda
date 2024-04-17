@@ -224,9 +224,13 @@ class LocalCUDACluster(LocalCluster):
         log_spilling=False,
         worker_class=None,
         pre_import=None,
+        custom_alloc=None,
+        custom_dealloc=None,
         **kwargs,
     ):
         print("Using custom LocalCudaCluster by Varun S....")
+        self.custom_alloc = custom_alloc
+        self.custom_dealloc = custom_dealloc
         # Required by RAPIDS libraries (e.g., cuDF) to ensure no context
         # initialization happens before we can set CUDA_VISIBLE_DEVICES
         os.environ["RAPIDS_NO_INITIALIZE"] = "True"
@@ -410,6 +414,9 @@ class LocalCUDACluster(LocalCluster):
                         release_threshold=self.rmm_release_threshold,
                         log_directory=self.rmm_log_directory,
                         track_allocations=self.rmm_track_allocations,
+                        device_idx=worker_count,
+                        custom_alloc=self.custom_alloc,
+                        custom_dealloc=self.custom_dealloc
                     ),
                     PreImport(self.pre_import),
                 },
