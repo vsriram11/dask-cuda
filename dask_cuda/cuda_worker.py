@@ -219,8 +219,8 @@ class CUDAWorker(Server):
                         log_directory=rmm_log_directory,
                         track_allocations=rmm_track_allocations,
                         device_idx=nvml_device_index(i, cuda_visible_devices(i)),
-                        custom_alloc=alloc,
-                        custom_dealloc=dealloc
+                        custom_alloc=custom_alloc,
+                        custom_dealloc=custom_dealloc
                     ),
                     PreImport(pre_import),
                 },
