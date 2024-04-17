@@ -392,6 +392,7 @@ class LocalCUDACluster(LocalCluster):
         spec = copy.deepcopy(self.new_spec)
         worker_count = self.cuda_visible_devices.index(name)
         visible_devices = cuda_visible_devices(worker_count, self.cuda_visible_devices)
+        print(f"NEW  WORKER SPEC:: {worker_count} in devices {visible_devices}")
         spec["options"].update(
             {
                 "env": {
