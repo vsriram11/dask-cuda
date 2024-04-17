@@ -108,6 +108,15 @@ class RMMSetup(WorkerPlugin):
                     worker, self.logging, self.log_directory
                 ),
             )
+        elif (self.custom_alloc is not None) and (self.custom_dealloc is not None):
+            import rmm
+            mr = rmm.mr.get_current_device_resource()
+            print("before..")
+            print(mr)
+            rmm.mr.set_per_device_resource(self.device_idx, rmm.mr.CallbackMemoryResource(partial(self.custom_alloc, self.device_idx), partial(self.custom_dealloc, self.device_idx)))
+            mr = rmm.mr.get_current_device_resource()
+            print("after..")
+            print(mr)
         # elif self.custom_mr is not None:
         #     import rmm
         #     rmm.mr.set_current_device_resource(self.custom_mr)
