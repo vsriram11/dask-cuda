@@ -395,8 +395,9 @@ class LocalCUDACluster(LocalCluster):
 
         spec = copy.deepcopy(self.new_spec)
         worker_count = self.cuda_visible_devices.index(name)
+        current_device_idx = self.cuda_visible_devices[worker_count]
         visible_devices = cuda_visible_devices(worker_count, self.cuda_visible_devices)
-        print(f"NEW  WORKER SPEC:: {worker_count} in devices {visible_devices}")
+        print(f"NEW  WORKER SPEC:: {current_device_idx} in devices {self.cuda_visible_devices}")
         spec["options"].update(
             {
                 "env": {
@@ -414,7 +415,7 @@ class LocalCUDACluster(LocalCluster):
                         release_threshold=self.rmm_release_threshold,
                         log_directory=self.rmm_log_directory,
                         track_allocations=self.rmm_track_allocations,
-                        device_idx=worker_count,
+                        device_idx=current_device_idx,
                         custom_alloc=self.custom_alloc,
                         custom_dealloc=self.custom_dealloc
                     ),
