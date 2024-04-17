@@ -189,6 +189,7 @@ class CUDAWorker(Server):
                 },
             )
 
+        print("In CUDA Worker Init")
         self.nannies = [
             Nanny(
                 scheduler,
