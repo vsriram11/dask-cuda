@@ -24,6 +24,7 @@ class RMMSetup(WorkerPlugin):
         release_threshold,
         log_directory,
         track_allocations,
+        custom_mr=None
     ):
         if initial_pool_size is None and maximum_pool_size is not None:
             raise ValueError(
@@ -46,6 +47,7 @@ class RMMSetup(WorkerPlugin):
         self.logging = log_directory is not None
         self.log_directory = log_directory
         self.rmm_track_allocations = track_allocations
+        self.custom_mr = custom_mr
 
     def setup(self, worker=None):
         if self.initial_pool_size is not None:
@@ -102,6 +104,10 @@ class RMMSetup(WorkerPlugin):
                     worker, self.logging, self.log_directory
                 ),
             )
+        elif self.custom_mr is not None:
+            import rmm
+            rmm.mr.set_current_device_resource(self.custom_mr)
+        
         if self.rmm_track_allocations:
             import rmm
 
