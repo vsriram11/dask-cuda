@@ -24,7 +24,7 @@ class RMMSetup(WorkerPlugin):
         release_threshold,
         log_directory,
         track_allocations,
-        device_idx,
+        device_idx=None,
         custom_alloc=None,
         custom_dealloc=None
     ):
