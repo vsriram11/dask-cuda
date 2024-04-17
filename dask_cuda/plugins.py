@@ -1,3 +1,4 @@
+from functools import partial
 import importlib
 import os
 
